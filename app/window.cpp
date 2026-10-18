@@ -439,7 +439,7 @@ void Window::createViewMenu()
     auto* appearance = new QActionGroup(view);
     const QList<QPair<QString, QString>> themes = {
         {QStringLiteral("dark"), tr("Dark")},
-        {QStringLiteral("light"), tr("Light")},
+        {QStringLiteral("light"), tr("Day")},
         {QStringLiteral("high-contrast"), tr("High Contrast")},
     };
     for (const auto& [name, label] : themes) {

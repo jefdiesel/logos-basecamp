@@ -2032,11 +2032,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792333565,
-        "narHash": "sha256-IYSr7sH/0XBJzfi/0Sqb1mlxbcRLJTmjHumfLUoGseg=",
+        "lastModified": 1792335976,
+        "narHash": "sha256-4IKg/hu97HZEmYhkRtW1DhiAeRjWZdoG02+Lc6i5AVo=",
         "owner": "jefdiesel",
         "repo": "logos-design-system",
-        "rev": "51b83a296ff16073a565d5a72fe79608416c0773",
+        "rev": "bc378dcca3b9748ab92a5cb1b6cc0ea110184afc",
         "type": "github"
       },
       "original": {

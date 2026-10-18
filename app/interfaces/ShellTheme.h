@@ -43,8 +43,9 @@ struct Colors {
 inline Colors colors(const QString& theme = name())
 {
     if (theme == QLatin1String("light"))
-        return {QColor("#F6F6F3"), QColor("#E6E6E1"), QColor("#454545"), QColor(0, 0, 0, 15),
-                QColor("#808080"), QColor("#454545"), QColor(0, 0, 0, 20)};
+        // Day: a sand frame around paper-white content.
+        return {QColor("#ECE7DC"), QColor("#FFFFFF"), QColor("#1B1A17"), QColor(27, 26, 23, 12),
+                QColor("#6E695F"), QColor("#55514A"), QColor(27, 26, 23, 16)};
     if (theme == QLatin1String("high-contrast"))
         return {QColor("#000000"), QColor("#1A1A1A"), QColor("#EDEDED"), QColor("#0A0A0A"),
                 QColor("#BDBDBD"), QColor("#EDEDED"), QColor(255, 255, 255, 26)};

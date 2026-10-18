@@ -19,7 +19,7 @@ Item {
 
     readonly property var themes: [
         { name: "dark",          label: qsTr("Dark") },
-        { name: "light",         label: qsTr("Light") },
+        { name: "light",         label: qsTr("Day: paper and ink, with one orange accent") },
         { name: "high-contrast", label: qsTr("High contrast: brighter text and borders on black") }
     ]
 
