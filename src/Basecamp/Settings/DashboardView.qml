@@ -21,7 +21,7 @@ Item {
                 text: "Dashboard"
                 font.pixelSize: Theme.typography.scaled(24)
                 font.weight: Font.Bold
-                color: "#ffffff"
+                color: Theme.palette.text
             }
 
             // Build summary: version (release only) + build type.
@@ -39,14 +39,14 @@ Item {
                     LogosText {
                         text: "Version"
                         font.pixelSize: Theme.typography.scaled(18)
-                        color: "#ffffff"
+                        color: Theme.palette.text
                     }
 
                     LogosSelectableText {
                         Layout.fillWidth: true
                         text: backend.buildVersion
                         font.pixelSize: Theme.typography.scaled(18)
-                        color: "#ffffff"
+                        color: Theme.palette.text
                         wrapMode: TextEdit.WrapAnywhere
                     }
                 }
@@ -54,7 +54,7 @@ Item {
                 LogosText {
                     text: backend.isPortableBuild ? "Portable build" : "Dev build"
                     font.pixelSize: Theme.typography.scaled(14)
-                    color: "#a0a0a0"
+                    color: Theme.palette.textSecondary
                 }
             }
 
@@ -68,7 +68,7 @@ Item {
                     text: "Commits"
                     font.pixelSize: Theme.typography.scaled(16)
                     font.weight: Font.Bold
-                    color: "#ffffff"
+                    color: Theme.palette.text
                 }
 
                 Repeater {
@@ -82,7 +82,7 @@ Item {
                         // be selected in full.
                         LogosSelectableText {
                             text: modelData.name
-                            color: "#a0a0a0"
+                            color: Theme.palette.textSecondary
                             font.pixelSize: Theme.typography.scaled(13)
                             Layout.preferredWidth: 260
                             Layout.alignment: Qt.AlignTop
@@ -90,7 +90,7 @@ Item {
                         }
                         LogosSelectableText {
                             text: modelData.commit
-                            color: "#d0d0d0"
+                            color: Theme.palette.text
                             font.family: "monospace"
                             font.pixelSize: Theme.typography.scaled(13)
                             Layout.fillWidth: true

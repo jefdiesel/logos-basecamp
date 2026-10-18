@@ -17,6 +17,12 @@ Item {
         { label: qsTr("Larger"),  scale: 1.4 }
     ]
 
+    readonly property var themes: [
+        { name: "dark",          label: qsTr("Dark") },
+        { name: "light",         label: qsTr("Light") },
+        { name: "high-contrast", label: qsTr("High contrast: brighter text and borders on black") }
+    ]
+
     LogosScrollView {
         id: scroll
         anchors.fill: parent
@@ -54,28 +60,32 @@ Item {
                 }
             }
 
-            RowLayout {
-                spacing: Theme.spacing.medium
+            ColumnLayout {
+                spacing: Theme.spacing.small
 
-                ColumnLayout {
-                    spacing: Theme.spacing.tiny
-                    LogosText {
-                        text: qsTr("High contrast")
-                        font.pixelSize: Theme.typography.subtitleText
-                        color: Theme.palette.text
-                    }
-                    LogosText {
-                        text: qsTr("Brighter text and borders on a black background.")
-                        font.pixelSize: Theme.typography.primaryText
-                        color: Theme.palette.textSecondary
-                    }
+                LogosText {
+                    text: qsTr("Appearance")
+                    font.pixelSize: Theme.typography.subtitleText
+                    color: Theme.palette.text
                 }
 
-                LogosSwitch {
-                    objectName: "settings.display.contrast"
-                    checked: Theme.currentTheme === "high-contrast"
-                    onToggled: Theme.setTheme(checked ? "high-contrast" : "dark")
+                Repeater {
+                    model: root.themes
+                    delegate: LogosRadioButton {
+                        objectName: "settings.display.theme." + modelData.name
+                        text: modelData.label
+                        checked: Theme.currentTheme === modelData.name
+                        onClicked: Theme.setTheme(modelData.name)
+                    }
                 }
+            }
+
+            LogosText {
+                text: qsTr("Also in the View menu: Bigger Text, Smaller Text and Actual Size (⌘+, ⌘−, ⌘0).")
+                font.pixelSize: Theme.typography.secondaryText
+                color: Theme.palette.textSecondary
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
             }
 
             Rectangle {
