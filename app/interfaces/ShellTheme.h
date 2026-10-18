@@ -30,6 +30,14 @@ inline QString name()
     return settings.value(QStringLiteral("LogosDesignSystem/theme"), QStringLiteral("dark")).toString();
 }
 
+// The text size multiplier (Theme.textScale), 0.85 to 1.6.
+inline double textScale()
+{
+    QSettings settings(settingsPath(), QSettings::IniFormat);
+    const double scale = settings.value(QStringLiteral("LogosDesignSystem/textScale"), 1.0).toDouble();
+    return scale >= 0.85 && scale <= 1.6 ? scale : 1.0;
+}
+
 struct Colors {
     QColor shell;          // window and dock background (Theme.palette.background)
     QColor tab;            // a selected or hovered tab
@@ -38,10 +46,13 @@ struct Colors {
     QColor idleTabText;
     QColor secondaryText;
     QColor hoverWash;      // hover on a tool button
+    double scale = 1.0;    // text size multiplier
+    int px(int size) const { return qRound(size * scale); }
 };
 
-inline Colors colors(const QString& theme = name())
+inline Colors colors(const QString& theme = name(), double scale = textScale())
 {
+    Colors c = [&]() -> Colors {
     if (theme == QLatin1String("light"))
         // Day: a sand frame around paper-white content.
         return {QColor("#ECE7DC"), QColor("#FFFFFF"), QColor("#1B1A17"), QColor(27, 26, 23, 12),
@@ -51,6 +62,9 @@ inline Colors colors(const QString& theme = name())
                 QColor("#BDBDBD"), QColor("#EDEDED"), QColor(255, 255, 255, 26)};
     return {QColor("#171717"), QColor("#262626"), QColor("#A4A4A4"), QColor(38, 38, 38, 153),
             QColor("#626262"), QColor("#A0A0A0"), QColor(255, 255, 255, 26)};
+    }();
+    c.scale = scale;
+    return c;
 }
 
 inline QString css(const QColor& c)
@@ -58,19 +72,21 @@ inline QString css(const QColor& c)
     return QStringLiteral("rgba(%1, %2, %3, %4)").arg(c.red()).arg(c.green()).arg(c.blue()).arg(c.alphaF());
 }
 
-// Calls `apply` now and again whenever the theme changes (checked each second)
+// Calls `apply` now and again whenever the theme or text size changes (checked each second)
 // for as long as `owner` lives.
 inline void follow(QObject* owner, std::function<void(const Colors&)> apply)
 {
-    auto current = std::make_shared<QString>(name());
-    apply(colors(*current));
+    // The theme and text size, as one key: either changing re-applies.
+    auto key = []() { return name() + QLatin1Char('/') + QString::number(textScale()); };
+    auto current = std::make_shared<QString>(key());
+    apply(colors());
     auto* timer = new QTimer(owner);
     timer->setInterval(1000);
-    QObject::connect(timer, &QTimer::timeout, owner, [current, apply]() {
-        const QString now = name();
+    QObject::connect(timer, &QTimer::timeout, owner, [current, apply, key]() {
+        const QString now = key();
         if (now == *current) return;
         *current = now;
-        apply(colors(now));
+        apply(colors());
     });
     timer->start();
 }

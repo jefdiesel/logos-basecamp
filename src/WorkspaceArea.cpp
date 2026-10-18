@@ -593,7 +593,8 @@ void WorkspaceArea::customizeTabBarStyle(QTabBar* tabBar)
 
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
-            height: 20px;
+            height: %6px;
+            font-size: %7px;
             min-width: 120px;
         }
 
@@ -607,7 +608,7 @@ void WorkspaceArea::customizeTabBarStyle(QTabBar* tabBar)
         QTabBar::tab:first, QTabBar::tab:only-one {
             min-width: 15px;
             max-width: 15px;
-            height: 20px;
+            height: %6px;
             padding: 0px 5px 0px 5px;
         }
 
@@ -621,8 +622,10 @@ void WorkspaceArea::customizeTabBarStyle(QTabBar* tabBar)
         }
     )");
     ShellTheme::follow(tabBar, [tabBar, tabSheet](const ShellTheme::Colors& c) {
+        // A 26px tab with 13px text, both scaled by the text size setting.
         tabBar->setStyleSheet(tabSheet.arg(ShellTheme::css(c.shell), ShellTheme::css(c.tab), ShellTheme::css(c.tabText),
-                                           ShellTheme::css(c.idleTab), ShellTheme::css(c.idleTabText)));
+                                           ShellTheme::css(c.idleTab), ShellTheme::css(c.idleTabText))
+                                  .arg(c.px(26)).arg(c.px(13)));
     });
 
     connect(tabBar, &QTabBar::tabMoved, this, [this, tabBar](int from, int to) {
