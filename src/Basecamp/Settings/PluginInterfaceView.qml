@@ -77,7 +77,7 @@ Item {
 
             LogosText {
                 text: "Interface: " + root.pluginName
-                font.pixelSize: 20
+                font.pixelSize: Theme.typography.scaled(20)
                 font.weight: Font.Bold
                 color: "#ffffff"
             }
@@ -296,7 +296,7 @@ Item {
                             TextArea {
                                 objectName: "pluginInterface.result"
                                 text: root.resultText
-                                font.pixelSize: 12
+                                font.pixelSize: Theme.typography.scaled(12)
                                 font.family: Theme.typography.publicSans
                                 color: "#4CAF50"
                                 readOnly: true

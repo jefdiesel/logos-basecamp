@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Logos.Controls
+import Logos.Theme
 
 Item {
     id: root
@@ -18,7 +19,7 @@ Item {
 
             LogosText {
                 text: "Dashboard"
-                font.pixelSize: 24
+                font.pixelSize: Theme.typography.scaled(24)
                 font.weight: Font.Bold
                 color: "#ffffff"
             }
@@ -37,14 +38,14 @@ Item {
 
                     LogosText {
                         text: "Version"
-                        font.pixelSize: 18
+                        font.pixelSize: Theme.typography.scaled(18)
                         color: "#ffffff"
                     }
 
                     LogosSelectableText {
                         Layout.fillWidth: true
                         text: backend.buildVersion
-                        font.pixelSize: 18
+                        font.pixelSize: Theme.typography.scaled(18)
                         color: "#ffffff"
                         wrapMode: TextEdit.WrapAnywhere
                     }
@@ -52,7 +53,7 @@ Item {
 
                 LogosText {
                     text: backend.isPortableBuild ? "Portable build" : "Dev build"
-                    font.pixelSize: 14
+                    font.pixelSize: Theme.typography.scaled(14)
                     color: "#a0a0a0"
                 }
             }
@@ -65,7 +66,7 @@ Item {
 
                 LogosText {
                     text: "Commits"
-                    font.pixelSize: 16
+                    font.pixelSize: Theme.typography.scaled(16)
                     font.weight: Font.Bold
                     color: "#ffffff"
                 }
@@ -82,7 +83,7 @@ Item {
                         LogosSelectableText {
                             text: modelData.name
                             color: "#a0a0a0"
-                            font.pixelSize: 13
+                            font.pixelSize: Theme.typography.scaled(13)
                             Layout.preferredWidth: 260
                             Layout.alignment: Qt.AlignTop
                             wrapMode: TextEdit.WrapAnywhere
@@ -91,7 +92,7 @@ Item {
                             text: modelData.commit
                             color: "#d0d0d0"
                             font.family: "monospace"
-                            font.pixelSize: 13
+                            font.pixelSize: Theme.typography.scaled(13)
                             Layout.fillWidth: true
                             Layout.alignment: Qt.AlignTop
                             wrapMode: TextEdit.WrapAnywhere

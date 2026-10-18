@@ -446,7 +446,7 @@ Dialog {
                 anchors.margins: 8
                 text: root.errorMessage
                 color: "#e0e0e0"
-                font.pixelSize: 13
+                font.pixelSize: Theme.typography.scaled(13)
                 wrapMode: Text.Wrap
             }
         }
@@ -478,7 +478,7 @@ Dialog {
                     text: "• " + (root.displayNameLookup(_name) || _name)
                           + (_detail.length > 0 ? " — " + _detail : "")
                     color: "#e0e0e0"
-                    font.pixelSize: 13
+                    font.pixelSize: Theme.typography.scaled(13)
                 }
             }
         }
@@ -498,7 +498,7 @@ Dialog {
                 Layout.fillWidth: true
                 text: "Currently running (will be temporarily unloaded):"
                 color: "#c0c0c0"
-                font.pixelSize: 13
+                font.pixelSize: Theme.typography.scaled(13)
                 font.weight: Theme.typography.weightBold
                 wrapMode: Text.Wrap
             }
@@ -519,7 +519,7 @@ Dialog {
                     delegate: LogosText {
                         text: "• " + (root.displayNameLookup(modelData) || modelData)
                         color: "#e0e0e0"
-                        font.pixelSize: 13
+                        font.pixelSize: Theme.typography.scaled(13)
                     }
                 }
             }
@@ -541,7 +541,7 @@ Dialog {
                 Layout.topMargin: 4
                 text: "Dependency changes:"
                 color: "#c0c0c0"
-                font.pixelSize: 13
+                font.pixelSize: Theme.typography.scaled(13)
                 font.weight: Theme.typography.weightBold
                 wrapMode: Text.Wrap
             }
@@ -595,7 +595,7 @@ Dialog {
                                     default:          return Theme.palette.text;
                                     }
                                 }
-                                font.pixelSize: 12
+                                font.pixelSize: Theme.typography.scaled(12)
                                 font.weight: Theme.typography.weightMedium
                             }
                         }
@@ -614,7 +614,7 @@ Dialog {
                                 return ver ? (head + "  " + ver) : head;
                             }
                             color: "#e0e0e0"
-                            font.pixelSize: 13
+                            font.pixelSize: Theme.typography.scaled(13)
                             elide: Text.ElideMiddle
                         }
                     }
