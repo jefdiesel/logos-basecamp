@@ -1,3 +1,4 @@
+#include "ShellTheme.h"
 #include "window.h"
 #include <QApplication>
 #include <QGuiApplication>
@@ -191,11 +192,11 @@ void Window::setupUi(const LogosBasecamp::HostProfile& hostProfile)
     }
 
     setAutoFillBackground(true);
-    {
+    ShellTheme::follow(this, [this](const ShellTheme::Colors& c) {
         QPalette p = palette();
-        p.setColor(QPalette::Window, QColor("#171717"));
+        p.setColor(QPalette::Window, c.shell);
         setPalette(p);
-    }
+    });
 
 #ifdef Q_OS_MAC
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
