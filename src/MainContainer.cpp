@@ -235,7 +235,7 @@ void MainContainer::setupUi()
     m_sidebarWidget->setMinimumWidth(80);
     m_sidebarWidget->setMaximumWidth(80);
     // set clear color to sidebar so that rounded corners don't show white
-    m_sidebarWidget->setClearColor(bgColor);
+    ShellTheme::follow(m_sidebarWidget, [w = m_sidebarWidget](const ShellTheme::Colors& c) { w->setClearColor(c.shell); });
 
     // === CONTENT AREA (vertical layout with stack + app launcher) ===
     QWidget* contentArea = new QWidget(this);
@@ -253,7 +253,7 @@ void MainContainer::setupUi()
     // Index 1: QML content views (Dashboard, Modules, PackageManager, Settings)
     m_contentWidget = new QQuickWidget(m_contentStack);
     m_contentWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
-    m_contentWidget->setClearColor(bgColor);
+    ShellTheme::follow(m_contentWidget, [w = m_contentWidget](const ShellTheme::Colors& c) { w->setClearColor(c.shell); });
     m_contentWidget->rootContext()->setContextProperty("backend", m_host->backendObject());
     ShellDevQml::load(m_contentWidget,
         QUrl(QStringLiteral("qrc:/qt/qml/Basecamp/Shell/Basecamp/Shell/ContentViews.qml")));
